@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-bash build.sh
-http-server -5 5000
+bash build.sh && \
+http-server -p 5000
