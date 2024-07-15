@@ -1,22 +1,31 @@
+
 const url = "/sandfall.wasm";
+
 WebAssembly.instantiateStreaming(fetch(url), { console }).then(
   (obj) => {
-    // Call an exported function:
     //obj.instance.exports.next();
     obj.instance.exports.init();
-    //obj.instance.exports.set_bytes();
 
-    // or access the buffer contents of an exported memory:
-    //const grid = new DataView(obj.instance.exports.memory.buffer);
-
-    const { memory: mem, set_bytes } = obj.instance.exports
+    const { memory: mem, set_bytes } = obj.instance.exports;
     const memoryView = new DataView(mem.buffer);
 
-    const values = Array(30).fill(0).map((_, i) => memoryView.getUint8(i))
-    console.log("VALUES", values)
+    //const values = Array(30).fill(0).map((_, i) => memoryView.getUint8(i));
+    //console.log("VALUES", values);
 
-    const mem2 = new Uint8Array(mem.buffer);
-    const values2 = mem2.slice(0, 30);
-    console.log("V2", values2)
+    const arr = new Uint8ClampedArray(mem.buffer);
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d", { alpha: false });
+
+    // Fill the array with the same RGBA values
+    const width = 256
+    const height = 256
+    let imageData = new ImageData(arr, width, height);
+
+    canvas.width = width;
+    canvas.height = height;
+
+    ctx.putImageData(imageData, 0, 0);
+    console.log(mem.buffer, width * height * 4)
+
   },
 );
