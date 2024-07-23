@@ -1,24 +1,21 @@
 (module
+  (import "console" "log" (func $log (param i32)))
   (memory (export "memory") 1)
   (global $width (mut i32) (i32.const 0))
+  (global $height (mut i32) (i32.const 0))
 
   (func (export "init") (param $width i32) (param $height i32)
     (local $i i32)
-    (local $num_bytes i32)
-
     i32.const 3 ;; make this dynamic later
     memory.grow
     drop
 
     local.get $width
     global.set $width
-
-    local.get $width
     local.get $height
-    i32.mul
-    i32.const 4
-    i32.mul
-    local.tee $num_bytes
+    global.set $height
+
+    i32.const 400
     local.set $i
 
     (loop $while
@@ -51,6 +48,8 @@
       i32.store8
 
       local.get $i
+      i32.const 4
+      i32.gt_s
       br_if $while
     )
   )
@@ -74,7 +73,34 @@
     return
   )
 
-  (func (export "next") (param $index i32)
+  (func (export "step")
+    (local $i i32)
+
+    global.get $width
+    global.get $height
+    i32.mul
+    i32.const 4
+    i32.mul
+    i32.const 4
+    i32.sub
+    local.set $i  ;; we don't want to step on last cell in grid
+
+    (loop $while
+      local.get $i
+      i32.const 4
+      i32.sub
+      local.tee $i ;; decrements counter
+
+      call $next
+
+      local.get $i
+      i32.const 4
+      i32.gt_s
+      br_if $while
+    )
+  )
+
+  (func $next (param $index i32)
     (local $cell i32)
     (local $index_s i32)
     (local $index_sw i32)
