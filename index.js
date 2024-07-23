@@ -5,11 +5,14 @@ WebAssembly.instantiateStreaming(fetch(url), { console }).then(
   (obj) => {
     //obj.instance.exports.next();
 
-    const { memory: mem, init, width: getWidth } = obj.instance.exports;
-    init()
+    //const [width, height] = [128, 128]
+    const [width, height] = [300, 200]
+    const { memory: mem, init } = obj.instance.exports;
 
-    const memoryView = new DataView(mem.buffer);
+    init(width, height)
+    const length = width * height * 4
 
+    //const memoryView = new DataView(mem.buffer);
     //const values = Array(30).fill(0).map((_, i) => memoryView.getUint8(i));
     //console.log("VALUES", values);
 
@@ -18,14 +21,12 @@ WebAssembly.instantiateStreaming(fetch(url), { console }).then(
     const ctx = canvas.getContext("2d", { alpha: false });
 
     // Fill the array with the same RGBA values
-    const width = 256
-    const height = 256
-    let imageData = new ImageData(arr, width, height);
+    let imageData = new ImageData(arr.subarray(0, length), width, height);
 
     canvas.width = width;
     canvas.height = height;
 
-    //ctx.putImageData(imageData, 0, 0);
+    ctx.putImageData(imageData, 0, 0);
     //console.log(mem.buffer, width * height * 4)
     //setInterval(() => {
       //next()
