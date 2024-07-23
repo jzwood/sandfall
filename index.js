@@ -4,9 +4,10 @@ const url = "/sandfall.wasm";
 WebAssembly.instantiateStreaming(fetch(url), { console }).then(
   (obj) => {
     //obj.instance.exports.next();
-    obj.instance.exports.init();
 
-    const { memory: mem, set_bytes } = obj.instance.exports;
+    const { memory: mem, init, width: getWidth } = obj.instance.exports;
+    init()
+
     const memoryView = new DataView(mem.buffer);
 
     //const values = Array(30).fill(0).map((_, i) => memoryView.getUint8(i));
@@ -24,8 +25,11 @@ WebAssembly.instantiateStreaming(fetch(url), { console }).then(
     canvas.width = width;
     canvas.height = height;
 
-    ctx.putImageData(imageData, 0, 0);
-    console.log(mem.buffer, width * height * 4)
-
+    //ctx.putImageData(imageData, 0, 0);
+    //console.log(mem.buffer, width * height * 4)
+    //setInterval(() => {
+      //next()
+      //ctx.putImageData(imageData, 0, 0);
+    //}, 500)
   },
 );

@@ -14,16 +14,14 @@
 ```
 for each cell from bottom to top
   if cell empty:
-    set changed=false
+    nop
   else if south_cell empty:
-    set cell=empty, changed=true
-    set south_cell=cell, changed=true
+    set cell=empty
+    set south_cell=cell
   else if south_west_cell empty:
-    set changed=true
-    set south_west_cell=cell, changed=true
+    set south_west_cell=cell
   else if south_east_cell empty:
-    set changed=true
-    set south_east_cell=cell, changed=true
+    set south_east_cell=cell
   else:
-    set changed=false
+    nop
 ```
