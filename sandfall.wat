@@ -1,7 +1,6 @@
 (module
   (memory (export "memory") 1)
-  (global $page_size i32 (i32.const 65_536))
-  (global $width i32 (i32.const 0))
+  (global $width (mut i32) (i32.const 0))
 
   (func (export "init") (param $width i32) (param $height i32)
     (local $i i32)
@@ -11,8 +10,8 @@
     memory.grow
     drop
 
-    (;local.get $width;)
-    (;global.set $width;)
+    local.get $width
+    global.set $width
 
     local.get $width
     local.get $height
@@ -55,18 +54,6 @@
       br_if $while
     )
   )
-
-  (;(func $width (export "width") (result i32);)
-    (;global.get $page_size;)
-    (;i32.const 4;)
-    (;i32.div_s;)
-    (;memory.size;)
-    (;i32.mul;)
-    (;f32.convert_i32_s;)
-    (;f32.sqrt;)
-    (;i32.trunc_f32_s;)
-    (;return;)
-  (;);)
 
   (func $put (param $index1 i32) (param $cell1 i32) (param $index2 i32) (result i32)
     local.get $index2
