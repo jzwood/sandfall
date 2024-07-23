@@ -32,6 +32,6 @@ WebAssembly.instantiateStreaming(fetch(url), { console }).then(
     setInterval(() => {
       step()
       ctx.putImageData(imageData, 0, 0);
-    }, 500)
+    }, 50)
   },
 );

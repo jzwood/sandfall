@@ -76,8 +76,15 @@
   (func (export "step")
     (local $i i32)
 
+    (;global.get $width;)
+    (;call $log;)
+    (;global.get $height;)
+    (;call $log;)
+
     global.get $width
     global.get $height
+    i32.const 1
+    i32.sub
     i32.mul
     i32.const 4
     i32.mul
@@ -117,6 +124,8 @@
 
     local.get $index
     global.get $width
+    i32.const 4
+    i32.mul
     i32.add
     local.set $index_s
 
