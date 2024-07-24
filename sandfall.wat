@@ -55,9 +55,17 @@
       i32.store8
   )
 
-  (func $block_stamp (export "block_stamp") (param $index i32) (param $red i32) (param $green i32) (param $blue i32)
-        (local $i i32)
-        (local $j i32)
+  (func $block_stamp (export "block_stamp") (param $x i32) (param $y i32) (param $red i32) (param $green i32) (param $blue i32)
+        (local $index i32)
+
+        local.get $y
+        global.get $width
+        i32.mul
+        local.get $x
+        i32.add
+        i32.const 4
+        i32.mul
+        local.set $index
 
         local.get $index
         local.get $red
@@ -67,6 +75,14 @@
 
         local.get $index
         i32.const 4
+        i32.add
+        local.get $red
+        local.get $green
+        local.get $blue
+        call $stamp
+
+        local.get $index
+        i32.const 8
         i32.add
         local.get $red
         local.get $green
@@ -85,6 +101,16 @@
         global.get $span
         i32.add
         i32.const 4
+        i32.add
+        local.get $red
+        local.get $green
+        local.get $blue
+        call $stamp
+
+        local.get $index
+        global.get $span
+        i32.add
+        i32.const 8
         i32.add
         local.get $red
         local.get $green
