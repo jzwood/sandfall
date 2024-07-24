@@ -103,14 +103,6 @@
         local.get $green
         local.get $blue
         call $stamp
-
-        local.get $index
-        i32.const 8
-        i32.sub
-        local.get $red
-        local.get $green
-        local.get $blue
-        call $stamp
   )
 
   (func $put (param $index1 i32) (param $cell1 i32) (param $index2 i32) (result i32)
@@ -173,9 +165,7 @@
     end
 
     local.get $index
-    global.get $width
-    i32.const 4
-    i32.mul
+    global.get $span
     i32.add
     local.set $index_s
 
