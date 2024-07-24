@@ -4,9 +4,21 @@ html, body {
 }
 
 body {
-  font-family: Courier;
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
 main {
   margin: 1rem;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+canvas {
+  cursor: cell;
+  transform-origin: top left;
+  image-rendering: pixelated;
 }
