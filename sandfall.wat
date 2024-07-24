@@ -4,6 +4,7 @@
   (global $width (mut i32) (i32.const 0))
   (global $height (mut i32) (i32.const 0))
   (global $span (mut i32) (i32.const 0))
+  (global $toggle (mut i32) (i32.const 0))
 
   (func $inspect (param $x i32) (result i32)
     local.get $x
@@ -31,6 +32,13 @@
 
   (func $stamp (export "stamp") (param $index i32) (param $red i32) (param $green i32) (param $blue i32)
       local.get $index
+      i32.load
+
+      if
+        return
+      end
+
+      local.get $index
       i32.const 0
       i32.add
       local.get $red
@@ -56,8 +64,8 @@
   )
 
   (func $block_stamp (export "block_stamp") (param $x i32) (param $y i32) (param $red i32) (param $green i32) (param $blue i32)
-        (local $index i32)
 
+        (local $index i32)
         local.get $y
         global.get $width
         i32.mul
@@ -90,28 +98,16 @@
         call $stamp
 
         local.get $index
-        global.get $span
-        i32.add
-        local.get $red
-        local.get $green
-        local.get $blue
-        call $stamp
-
-        local.get $index
-        global.get $span
-        i32.add
         i32.const 4
-        i32.add
+        i32.sub
         local.get $red
         local.get $green
         local.get $blue
         call $stamp
 
         local.get $index
-        global.get $span
-        i32.add
         i32.const 8
-        i32.add
+        i32.sub
         local.get $red
         local.get $green
         local.get $blue
@@ -147,9 +143,7 @@
     i32.mul
     i32.const 4
     i32.mul
-    i32.const 4
-    i32.sub
-    local.set $i  ;; we don't want to step on last cell in grid
+    local.set $i  ;; we don't want to step on last row of grid
 
     (loop $while
       local.get $i
@@ -160,8 +154,6 @@
       call $next
 
       local.get $i
-      i32.const 4
-      i32.gt_s
       br_if $while
     )
   )
