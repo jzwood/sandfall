@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-wat2wasm sandfall.wat -o sandfall.wasm && \
-echo "+ sandfall.wasm"
+mkdir -p dist && \
+wat2wasm sandfall.wat -o dist/sandfall.wasm && \
+echo "+ dist/sandfall.wasm"

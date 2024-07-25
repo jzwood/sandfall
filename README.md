@@ -6,8 +6,10 @@
   - `brew install wabt`
 - install local server (optional)
   - `brew install http-server`
+- install deno
+  - `brew install deno`
 - scripts
-  - `build.sh` compiles wat to wasm
+  - `build.sh` compiles wat to wasm and copies all src files to dist/
   - `serve.sh` serves app locally (optional)
 
 ## Algorithm
