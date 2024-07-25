@@ -27,30 +27,31 @@ WebAssembly.instantiateStreaming(fetch(url), { console }).then(
     const rgb = [0, 0, 0];
     const cursors = [];
     const cancel = () => {
-      cursors.length = 0
+      cursors.length = 0;
     };
 
     const move = (event, xys) => {
       const bounding = canvas.getBoundingClientRect();
-      cursors.length = 0
+      cursors.length = 0;
       cursors.push(...xys.map(([clientX, clientY]) => [
         Math.min(width, ~~((clientX - bounding.left) / scale)),
-        Math.min(height, ~~((clientY - bounding.top) / scale))
-      ]))
+        Math.min(height, ~~((clientY - bounding.top) / scale)),
+      ]));
     };
 
     canvas.addEventListener("mousemove", (event) => {
-      const clientX = event.clientX
-      const clientY = event.clientY
-      move(event, [[clientX, clientY]])
+      const clientX = event.clientX;
+      const clientY = event.clientY;
+      move(event, [[clientX, clientY]]);
     });
     canvas.addEventListener("touchmove", (event) => {
-      move(event, Array.from(event.touches).map(e => [e.clientX, e.clientY]))
+      move(event, Array.from(event.touches).map((e) => [e.clientX, e.clientY]));
     });
 
     canvas.addEventListener("touchcancel", cancel);
     canvas.addEventListener("touchend", cancel);
     canvas.addEventListener("mouseleave", cancel);
+    canvas.classList.remove("loading")
 
     const twiddle = (x, delta = 15) => {
       const dx = Math.floor(Math.random() * delta - (0.5 * delta));
@@ -67,9 +68,9 @@ WebAssembly.instantiateStreaming(fetch(url), { console }).then(
       // draw block of pixels
       cursors.forEach(([x, y]) => {
         blockStamp(x, y, r, g, b);
-      })
+      });
 
-      // timestep
+      // time step
       step();
       ctx.putImageData(imageData, 0, 0);
 

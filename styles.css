@@ -14,6 +14,10 @@ h1 {
   font-weight: normal;
 }
 
+canvas.loading {
+  cursor: wait;
+}
+
 canvas {
   cursor: cell;
   transform-origin: top left;
