@@ -1,4 +1,4 @@
-const url = "/sandfall.wasm";
+const url = "sandfall.wasm";
 
 WebAssembly.instantiateStreaming(fetch(url), { console }).then(
   (obj) => {
