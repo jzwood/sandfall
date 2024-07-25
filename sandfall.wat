@@ -145,6 +145,8 @@
       call $next
 
       local.get $i
+      i32.const 4 ;; skip top left cell
+      i32.gt_s
       br_if $while
     )
   )
@@ -169,6 +171,7 @@
     i32.add
     local.set $index_s
 
+    ;; check south cell
     local.get $index
     local.get $cell
     local.get $index_s
@@ -178,17 +181,7 @@
       return
     end
 
-    local.get $index
-    local.get $cell
-    local.get $index_s
-    i32.const 4
-    i32.sub
-    call $put
-
-    if
-      return
-    end
-
+    ;; check south east cell
     local.get $index
     local.get $cell
     local.get $index_s
@@ -200,5 +193,20 @@
       return
     end
 
+    ;; check west and south west cell
+    local.get $index
+    i32.const 4
+    i32.sub
+    i32.load
+    i32.eqz
+    if
+      local.get $index
+      local.get $cell
+      local.get $index_s
+      i32.const 4
+      i32.sub
+      call $put
+      drop
+    end
   )
 )

@@ -22,6 +22,10 @@ WebAssembly.instantiateStreaming(fetch(url), { console }).then(
 
     const rgb = [0, 0, 0];
     const mouse = [-1, -1];
+    const cancel = () => {
+      mouse[0] = -1;
+      mouse[1] = -1;
+    }
 
     canvas.addEventListener("mousemove", (event) => {
       const bounding = canvas.getBoundingClientRect();
@@ -31,10 +35,7 @@ WebAssembly.instantiateStreaming(fetch(url), { console }).then(
       mouse[1] = y;
     });
 
-    canvas.addEventListener("mouseleave", (event) => {
-      mouse[0] = -1;
-      mouse[1] = -1;
-    });
+    canvas.addEventListener("mouseleave", cancel)
 
     const twiddle = (x, delta = 15) => {
       const dx = Math.floor(Math.random() * delta - (0.5 * delta));

@@ -12,15 +12,15 @@
 
 ## Algorithm
 ```
-for each cell from bottom to top
+for each cell from bottom right to top left
   if cell empty:
     nop
   else if south_cell empty:
     set cell=empty
     set south_cell=cell
-  else if south_west_cell empty:
+  else if west cell and south_west_cell empty:
     set south_west_cell=cell
-  else if south_east_cell empty:
+  else if east and south_east_cell empty:
     set south_east_cell=cell
   else:
     nop
