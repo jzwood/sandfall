@@ -14,7 +14,13 @@
   (func (export "init") (param $width i32) (param $height i32)
     (local $i i32)
     (local $span i32)
-    i32.const 3 ;; make this dynamic later
+
+    local.get $width
+    local.get $height
+    i32.mul
+    i32.const 16_384 ;; i32s/ page
+    i32.div_s
+    call $inspect
     memory.grow
     drop
 

@@ -7,10 +7,7 @@ body {
   background-color: black;
   color: white;
   font-family: Arial, sans-serif;
-}
-
-main {
-  margin: 1rem;
+  overscroll-behavior: none;
 }
 
 h1 {
