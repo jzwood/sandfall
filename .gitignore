@@ -1,3 +1,2 @@
 *.wasm
 .DS_Store
-dist/*
