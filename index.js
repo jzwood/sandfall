@@ -1,5 +1,6 @@
 const url = "sandfall.wasm";
 
+// this is an old version of loading wasm modules; however the new streaming API doesn't work with neocities or github pages
 fetch(url)
   .then((response) => response.arrayBuffer())
   .then((bytes) => WebAssembly.instantiate(bytes, { console }))
