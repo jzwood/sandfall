@@ -1,13 +1,13 @@
 html, body {
   margin: 0;
   padding: 0;
+  overscroll-behavior: contain;
 }
 
 body {
   background-color: black;
   color: white;
   font-family: Arial, sans-serif;
-  overscroll-behavior: none;
 }
 
 h1 {
