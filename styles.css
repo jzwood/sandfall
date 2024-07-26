@@ -1,6 +1,9 @@
 html, body {
   margin: 0;
   padding: 0;
+}
+
+html {
   overscroll-behavior: contain;
 }
 
@@ -8,6 +11,8 @@ body {
   background-color: black;
   color: white;
   font-family: Arial, sans-serif;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 h1 {

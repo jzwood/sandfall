@@ -23,7 +23,7 @@ function main() {
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d", { alpha: false });
 
-        let imageData = new ImageData(arr.subarray(0, length), width, height);
+        const imageData = new ImageData(arr.subarray(0, length), width, height);
 
         canvas.width = width;
         canvas.height = height;
@@ -103,7 +103,10 @@ function debounce(func, timeout = 300) {
 document.addEventListener("DOMContentLoaded", () => {
   main();
   const reload = debounce(() => {
-    window.location.reload();
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    location.reload();
   }, 500);
   window.addEventListener("resize", reload);
 });
