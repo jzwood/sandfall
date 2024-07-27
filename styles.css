@@ -37,3 +37,8 @@ canvas {
   cursor: pointer;
   transform: translate(-50%, -50%);
 }
+
+#tutorial span:first-child {
+  vertical-align: -webkit-baseline-middle;
+  vertical-align: -moz-middle-with-baseline;
+}
