@@ -8,14 +8,11 @@ html {
 }
 
 body {
+  font-family: Arial, sans-serif;
   background-color: black;
   color: white;
   overflow: hidden;
   overscroll-behavior: none;
-}
-
-h1 {
-  font-weight: normal;
 }
 
 canvas.loading {
@@ -32,13 +29,7 @@ canvas {
   position: absolute;
   left: 50%;
   top: 50%;
-  font-size: 4rem;
   pointer-events: none;
   cursor: pointer;
   transform: translate(-50%, -50%);
-}
-
-#tutorial span:first-child {
-  vertical-align: -webkit-baseline-middle;
-  vertical-align: -moz-middle-with-baseline;
 }
