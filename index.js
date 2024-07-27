@@ -21,6 +21,7 @@ function main() {
 
         const arr = new Uint8ClampedArray(memory.buffer);
         const canvas = document.getElementById("canvas");
+        const tutorial = document.getElementById("tutorial");
         const ctx = canvas.getContext("2d", { alpha: false });
 
         const imageData = new ImageData(arr.subarray(0, length), width, height);
@@ -36,11 +37,12 @@ function main() {
         };
 
         const move = (event, xys) => {
+          tutorial.remove();
           const bounding = canvas.getBoundingClientRect();
           cursors.length = 0;
           cursors.push(...xys.map(([clientX, clientY]) => [
-            Math.min(width, ~~((clientX - bounding.left) / scale)),
-            Math.min(height, ~~((clientY - bounding.top) / scale)),
+            clamp(~~((clientX - bounding.left) / scale), 0, width),
+            clamp(~~((clientY - bounding.top) / scale), 0, height),
           ]));
         };
 
@@ -88,6 +90,10 @@ function main() {
         raf();
       },
     );
+}
+
+function clamp(val, min, max) {
+  return Math.min(Math.max(val, min), max);
 }
 
 function debounce(func, timeout = 300) {

@@ -10,7 +10,6 @@ html {
 body {
   background-color: black;
   color: white;
-  font-family: Arial, sans-serif;
   overflow: hidden;
   overscroll-behavior: none;
 }
@@ -27,4 +26,14 @@ canvas {
   cursor: cell;
   transform-origin: top left;
   image-rendering: pixelated;
+}
+
+#tutorial {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 4rem;
+  pointer-events: none;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
 }
