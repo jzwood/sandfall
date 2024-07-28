@@ -1,5 +1,6 @@
 # Sandfall
 
+<img src="assets/preview.png">
 
 # Dev Instructions
 - install wat2wasm
