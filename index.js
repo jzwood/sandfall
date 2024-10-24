@@ -22,6 +22,12 @@ function main() {
         const arr = new Uint8ClampedArray(memory.buffer);
         const canvas = document.getElementById("canvas");
         const tutorial = document.getElementById("tutorial");
+        const helpText = document.querySelector("#tutorial p");
+
+        if (!window.matchMedia("(pointer: coarse)").matches) {
+          helpText.remove();
+        }
+
         const ctx = canvas.getContext("2d", { alpha: true });
 
         const imageData = new ImageData(arr.subarray(0, length), width, height);
